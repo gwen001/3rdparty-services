@@ -22,7 +22,7 @@ class ThirdParty
 		3 => 'service has NOT been found',
 	];
 
-	const TEST_METHOD_HTTP_HEADER = 1;
+	const TEST_METHOD_HTTP_HEADER  = 1;
 	const TEST_METHOD_WEB_CONTENT  = 2;
 	const TEST_METHOD_API_CALL     = 3;
 	const TEST_METHOD_PING         = 4;
