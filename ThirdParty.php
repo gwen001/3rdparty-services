@@ -66,7 +66,11 @@ class ThirdParty
 			Utils::help( $v.' class wrongly configured' );
 		}
 		$this->t_services[ strtolower($v::SERVICE_NAME) ] = $v;
+		ksort( $this->t_services );
 		return true;;
+	}
+	public function getAvailableServices() {
+		return array_keys($this->t_services);
 	}
 
 

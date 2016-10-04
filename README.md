@@ -7,6 +7,7 @@ Usage: php 3rdparty.php -d <subdomain> -s <service>
 
 Options:
 	-d	set subdomain to test
+	-l	list services that are supported
 	-s	set service to test
 	-h	print this help
 

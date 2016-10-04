@@ -25,6 +25,7 @@ set_time_limit( 0 );
 	$tparty->registerService( 'ServiceGitHub' );
 	$tparty->registerService( 'ServiceFastly' );
 	$tparty->registerService( 'ServiceHelpScout' );
+	$tparty->registerService( 'ServiceWordpress' );
 //	$tparty->registerService( 'ServiceThisMoment' );
 //	$tparty->registerService( 'ServiceAmazon' );
 
@@ -36,6 +37,9 @@ set_time_limit( 0 );
 				$tparty->setDomain( $_SERVER['argv'][$i+1] );
 				$i++;
 				break;
+
+			case '-l':
+				Utils::help( implode(',',$tparty->getAvailableServices()) );
 
 			case '-s':
 				$tparty->setService( $_SERVER['argv'][$i+1] );
@@ -52,7 +56,7 @@ set_time_limit( 0 );
 	}
 
 	if( !$tparty->getDomain() ) {
-		Utils::help( 'Domain not found!' );
+		Utils::help( 'Domain not found' );
 	}
 }
 // ---
