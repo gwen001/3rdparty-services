@@ -49,18 +49,19 @@ class ServiceWordpress
 		$t_json = json_decode( $output );
 
 		$found = false;
+		$w_domain = $domain.'.wordpress.com';
 		foreach( $t_json->body as $obj ) {
-			if( $obj->domain_name == $domain ) {
+			if( $obj->domain_name == $w_domain ) {
 				$found = true;
-				continue;
+				break;
 			}
 		}
 
 		if( $found ) {
 			// found in request result means available, so not found :)
-			$status = ThirdParty::SERVICE_STATUS_FOUND;
-		} else {
 			$status = ThirdParty::SERVICE_STATUS_NOT_FOUND;
+		} else {
+			$status = ThirdParty::SERVICE_STATUS_FOUND;
 		}
 
 		$t_result[] = [ 'wordpress.com', $status, ThirdParty::TEST_METHOD_API_CALL ];

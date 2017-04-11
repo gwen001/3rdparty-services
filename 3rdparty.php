@@ -27,7 +27,10 @@ set_time_limit( 0 );
 	$tparty->registerService( 'ServiceHelpScout' );
 	$tparty->registerService( 'ServiceWordpress' );
 //	$tparty->registerService( 'ServiceThisMoment' );
-//	$tparty->registerService( 'ServiceAmazon' );
+	$tparty->registerService( 'ServiceAmazon' );
+	$tparty->registerService( 'ServiceUservoice' );
+	$tparty->registerService( 'ServiceCloudfront' );
+	$tparty->registerService( 'ServiceDesk' );
 
 	$argc = $_SERVER['argc'] - 1;
 

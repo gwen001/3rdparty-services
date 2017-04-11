@@ -23,7 +23,7 @@ class ServiceStatusPage
 		curl_setopt( $c, CURLOPT_RETURNTRANSFER, true );
 		$output = curl_exec( $c );
 		$t_info = curl_getinfo( $c );
-		//var_dump( $t_info );
+		var_dump( $t_info );
 		curl_close( $c );
 
 		if( $t_info['http_code'] == 200 ) {

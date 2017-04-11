@@ -9,6 +9,8 @@
 class ThirdParty
 {
 	const SERVICE_SEP = ',';
+	
+	const USER_AGENT = 'Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:52.0) Gecko/20100101 Firefox/52.0';
 
 	const SERVICE_STATUS_UNKNOW    = 0;
 	const SERVICE_STATUS_FOUND     = 1;

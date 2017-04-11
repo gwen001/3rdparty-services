@@ -33,7 +33,7 @@ class ServiceHelpScout
 			$status = ThirdParty::SERVICE_STATUS_UNKNOW;
 		}
 
-		$t_result['helpscoutdocs.com'] = $status;
+		$t_result[] = ['helpscoutdocs.com', $status, ThirdParty::TEST_METHOD_HTTP_HEADER ];
 
 		return $t_result;
 	}
