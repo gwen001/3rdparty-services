@@ -116,7 +116,7 @@ class ThirdParty
 		$n_domain = count( $this->t_domain );
 		$n_service = count( $this->service );
 		$n_safe = 0;
-		$n_danger = 0;
+		$n_warning = 0;
 		$n_vulnerable = 0;
 		
 		echo $n_domain." hosts to test on ".$n_service." services.\n\n";
@@ -145,8 +145,8 @@ class ThirdParty
 					$n_vulnerable++;
 					Utils::_println( 'the host seems to be VULNERABLE!', 'red' );
 				} elseif( $n_success ) {
-					$n_danger++;
-					Utils::_println( 'the host seems to be in DANGER!', 'yellow' );
+					$n_warning++;
+					Utils::_println( 'the host seems to be MITIGATE!', 'yellow' );
 				} else {
 					$n_safe++;
 					Utils::_println( 'the host seems to be SAFE!', 'green' );
@@ -156,6 +156,6 @@ class ThirdParty
 			echo "\n";
 		}
 		
-		echo $current_domain." hosts tested, ".$n_safe." safe, ".$n_danger." in danger, ".$n_vulnerable." vulnerable.\n";
+		echo $current_domain." hosts tested, ".$n_safe." safe, ".$n_warning." mitigate, ".$n_vulnerable." vulnerable.\n";
 	}
 }
