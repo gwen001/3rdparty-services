@@ -18,10 +18,10 @@ class ThirdParty
 	const SERVICE_STATUS_NOT_FOUND = 3;
 
 	const SERVICE_STATUS = [
-		0 => 'uknown status',
-		1 => 'service has been found',
-		2 => 'service seems to be disable/not allowed',
-		3 => 'service has NOT been found',
+		0 => 'Uknown status',
+		1 => 'Service has been found',
+		2 => 'Service seems to be disable/not allowed',
+		3 => 'Service has been NOT FOUND',
 	];
 
 	const TEST_METHOD_HTTP_HEADER  = 1;
@@ -36,7 +36,7 @@ class ThirdParty
 		4 => 'system command ping',
 	];
 
-	private $domain = null;
+	private $t_domain = [];
 
 	private $service = null;
 
@@ -77,10 +77,14 @@ class ThirdParty
 
 
 	public function getDomain() {
-		return $this->domain;
+		return $this->t_domain;
 	}
 	public function setDomain( $v ) {
-		$this->domain = trim( $v );
+		if( is_file($v) ) {
+			$this->t_domain = file( $v, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES );
+		} else {
+			$this->t_domain = [ trim($v) ];
+		}
 		return true;
 	}
 
@@ -106,19 +110,52 @@ class ThirdParty
 		if( !$this->service ) {
 			$this->service = array_keys( $this->t_services );
 		}
+		
+		$current_domain = 0;
+		$current_service = 0;
+		$n_domain = count( $this->t_domain );
+		$n_service = count( $this->service );
+		$n_safe = 0;
+		$n_danger = 0;
+		$n_vulnerable = 0;
+		
+		echo $n_domain." hosts to test on ".$n_service." services.\n\n";
 
-//		var_dump( $this->t_services );
-//		var_dump( $this->service );
-//		exit();
-
-		foreach( $this->service as $s ) {
-			$class = $this->t_services[ $s ];
-			echo "Testing ".$class::SERVICE_NAME.":\n";
-			$t_result = $class::test( $this->domain );
-			foreach( $t_result as $r ) {
-				echo self::SERVICE_STATUS[ $r[1] ].' on '.$r[0].' according to '.self::TEST_METHOD[ $r[2] ]."\n";
+		foreach( $this->t_domain as $d )
+		{
+			$current_domain++;
+			$current_service = 0;
+			
+			foreach( $this->service as $s )
+			{
+				$current_service++;
+				$class = $this->t_services[ $s ];
+				
+				echo "Host: ".$d." (".$current_domain."/".$n_domain."), Service: ".$class::SERVICE_NAME." (".$current_service."/".$n_service.")\n";
+				
+				$t_result = $class::test( $d, $n_test, $n_success );
+				
+				foreach( $t_result as $r ) {
+					echo self::SERVICE_STATUS[ $r[1] ].' on '.$r[0].' according to '.self::TEST_METHOD[ $r[2] ]."\n";
+				}
+				
+				echo 'Test passed ('.$n_success.'/'.$n_test.'), ';
+				
+				if( $n_success == $n_test ) {
+					$n_vulnerable++;
+					Utils::_println( 'the host seems to be VULNERABLE!', 'red' );
+				} elseif( $n_success ) {
+					$n_danger++;
+					Utils::_println( 'the host seems to be in DANGER!', 'yellow' );
+				} else {
+					$n_safe++;
+					Utils::_println( 'the host seems to be SAFE!', 'green' );
+				}
 			}
+			
 			echo "\n";
 		}
+		
+		echo $current_domain." hosts tested, ".$n_safe." safe, ".$n_danger." in danger, ".$n_vulnerable." vulnerable.\n";
 	}
 }
