@@ -122,7 +122,7 @@ class ServiceHeroku
 		//var_dump( $t_info );
 		curl_close( $c );
 
-		if( stristr($output,"no-such-app.html") ) {
+		if( stristr($output,"<title>No such app</title>") ) {
 			$n_success++;
 			$status = ThirdParty::SERVICE_STATUS_NOT_FOUND;
 		} else {
@@ -130,7 +130,7 @@ class ServiceHeroku
 		}
 
 		$t_result[] = [ $url, $status, ThirdParty::TEST_METHOD_WEB_CONTENT ];
-		
+		/*
 		$n_test++;
 		$url = 'https://'.$domain;
 		$c = curl_init();
@@ -141,11 +141,12 @@ class ServiceHeroku
 		curl_setopt( $c, CURLOPT_RETURNTRANSFER, true );
 		curl_setopt( $c, CURLOPT_FOLLOWLOCATION, true );
 		$output = curl_exec( $c );
+		//var_dump( $output );
 		$t_info = curl_getinfo( $c );
 		//var_dump( $t_info );
 		curl_close( $c );
 
-		if( stristr($output,"no-such-app.html") ) {
+		if( stristr($output,"<title>No such app</title>") ) {
 			$n_success++;
 			$status = ThirdParty::SERVICE_STATUS_NOT_FOUND;
 		} else {
@@ -153,7 +154,7 @@ class ServiceHeroku
 		}
 
 		$t_result[] = [ $url, $status, ThirdParty::TEST_METHOD_WEB_CONTENT ];
-		
+		*/
 		return $t_result;
 	}
 }

@@ -18,19 +18,20 @@ set_time_limit( 0 );
 // parse command line
 {
 	$tparty = new ThirdParty();
-	$tparty->registerService( 'ServiceZendesk' );
-	$tparty->registerService( 'ServiceStatusPage' );
-	$tparty->registerService( 'ServiceSquarespace' );
-	$tparty->registerService( 'ServiceHeroku' );
-	$tparty->registerService( 'ServiceGitHub' );
-	$tparty->registerService( 'ServiceFastly' );
-	$tparty->registerService( 'ServiceHelpScout' );
-	$tparty->registerService( 'ServiceWordpress' );
-//	$tparty->registerService( 'ServiceThisMoment' );
 	$tparty->registerService( 'ServiceAmazon' );
-	$tparty->registerService( 'ServiceUservoice' );
 	$tparty->registerService( 'ServiceCloudfront' );
 	$tparty->registerService( 'ServiceDesk' );
+	$tparty->registerService( 'ServiceFastly' );
+	$tparty->registerService( 'ServiceGitHub' );
+	$tparty->registerService( 'ServiceHelpScout' );
+	$tparty->registerService( 'ServiceHeroku' );
+//	$tparty->registerService( 'ServiceMailgun' );
+//	$tparty->registerService( 'ServiceSquarespace' );
+	$tparty->registerService( 'ServiceStatusPage' );
+//	$tparty->registerService( 'ServiceThisMoment' );
+	$tparty->registerService( 'ServiceUservoice' );
+	$tparty->registerService( 'ServiceWordpress' );
+	$tparty->registerService( 'ServiceZendesk' );
 
 	$argc = $_SERVER['argc'] - 1;
 

@@ -86,7 +86,7 @@ class ServiceCloudfront
 		}
 
 		$t_result[] = [ $url, $status, ThirdParty::TEST_METHOD_WEB_CONTENT ];
-		
+		/*
 		$n_test++;
 		$url = 'https://'.$domain;
 		$c = curl_init();
@@ -110,7 +110,7 @@ class ServiceCloudfront
 		}
 
 		$t_result[] = [ $url, $status, ThirdParty::TEST_METHOD_WEB_CONTENT ];
-
+		*/
 		return $t_result;
 	}
 }
